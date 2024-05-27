@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
+   <link rel="stylesheet" href="../css/registro_login.css">
+
+   <title>Registro</title>
+</head>
+
+<body>
+   <div class="registro">
+      <img src="../img/fondo_L_R.jpg" alt="registroimg" class="r-img">
+
+      <form action="../php/registro.php" class="r-form" method="POST" onsubmit="return validarFechaNacimiento()">
+         <h1 class="r-titulo">¡Regístrate ahora!</h1>
+
+         <div class="r-content">
+            <div class="r-box">
+               <i class="ri-user-3-line r-icon"></i>
+
+               <div class="r-box-input">
+                  <input type="text" required class="r-input" id="nombre" name="nombre" placeholder=" ">
+                  <label for="nombre" class="r-label">Nombre</label>
+               </div>
+            </div>
+         </div>
+
+         <div class="r-content">
+            <div class="r-box">
+               <i class="ri-user-3-line r-icon"></i>
+
+               <div class="r-box-input">
+                  <input type="text" required class="r-input" id="apellidos" name="apellido" placeholder=" ">
+                  <label for="apellidos" class="r-label">Apellido</label>
+               </div>
+            </div>
+         </div>
+
+         <div class="r-content">
+            <div class="r-box">
+               <i class="ri-user-3-line r-icon"></i>
+
+               <div class="r-box-input">
+                  <input type="email" required class="r-input" id="email" name="email" placeholder=" ">
+                  <label for="email" class="r-label">Email</label>
+               </div>
+            </div>
+         </div>
+
+         <div class="r-content">
+            <div class="r-box">
+               <i class="ri-calendar-line r-icon" style="color: white;"></i>
+
+               <div class="r-box-input">
+                  <input type="date" required class="r-input" id="fecha_nacimiento" name="fecha_nacimiento">
+                  <label for="fecha_nacimiento" class="r-label">Fecha de Nacimiento</label>
+               </div>
+            </div>
+         </div>
+
+         <div class="r-content">
+            <div class="r-box">
+               <i class="ri-lock-2-line r-icon"></i>
+
+               <div class="r-box-input">
+                  <input type="password" required class="r-input" id="password" name="password" placeholder=" ">
+                  <label for="password" class="r-label">Contraseña</label>
+                  <i class="ri-eye-off-line r-eye" id="r-eye"></i>
+               </div>
+            </div>
+         </div>
+
+         <button type="submit" class="r-button">Registrarse</button>
+
+      </form>
+   </div>
+
+   <script src="../js/main.js"></script>
+   
+</body>
+
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../ProyectoNivelC/nivel1.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
+</head>
+<body>
+    <section class="container top-categories">_
+        <h1 class="lilita-one-regular">Bienvenido</h1>
+        <div id="nivel-detalle" class="container-categories"></div>
+    </section>
+
+    <script>
+        // Obtener el ID del nivel de la URL
+        const params = new URLSearchParams(window.location.search);
+        const nivelId = params.get('nivel_id');
+
+        // URL de tu API
+        const apiUrl = `http://localhost/proyectoNivelC/get_niveles.php?nivel_id=${nivelId}`;
+
+        // Función para cargar los detalles del nivel
+        function cargarNivel() {
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Datos recibidos de la API:", data); // Verifica los datos recibidos de la API
+                    mostrarNivel(data);
+                })
+                .catch(error => console.error('Error en la solicitud:', error.message));
+        }
+
+        // Función para mostrar los detalles del nivel
+        function mostrarNivel(nivel) {
+            const container = document.getElementById('nivel-detalle');
+            if (nivel && nivel.escenarios) {
+                container.innerHTML = `
+                    ${nivel.escenarios.map(escenario => `
+                        <div class="card-category category-escenario">
+                            <h4>${escenario.nombre}</h4>
+                            <p>${escenario.descripcion}</p>
+                            <span onclick="redirigir(${escenario.id})">Iniciar</span>
+                        </div>
+                    `).join('')}
+                `;
+            } else {
+                container.innerHTML = '<p>No hay escenarios disponibles.</p>';
+            }
+        }
+
+        // Llamar a la función para cargar el nivel cuando la página se cargue
+        window.onload = cargarNivel;
+
+        // Función para redirigir al examen correspondiente al escenario
+        function redirigir(escenarioId) {
+            window.location.href = `examen1.html?escenario_id=${escenarioId}`;
+        }
+    </script>
+</body>
+</html>

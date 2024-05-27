@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
+   <link rel="stylesheet" href="../css/registro_login.css">
+
+   <title>Iniciar Sesión</title>
+</head>
+
+<body>
+   <div class="registro">
+      <form action="../php/login_admin.php" class="r-form" method="POST">
+         <h1 class="r-titulo">¡Bienvenido!</h1>
+
+         <div class="r-content">
+            <div class="r-box">
+               <i class="ri-user-3-line r-icon"></i>
+
+               <div class="r-box-input">
+                  <input type="text" required class="r-input" id="username" name="username" placeholder=" ">
+                  <label for="usuario" class="r-label">Username</label>
+               </div>
+            </div>
+
+            <div class="r-box">
+               <i class="ri-lock-2-line r-icon"></i>
+
+               <div class="r-box-input">
+                  <input type="password" required class="r-input" id="password" name="password" placeholder=" ">
+                  <label for="password" class="r-label">Contraseña</label>
+                  <i class="ri-eye-off-line r-eye" id="r-eye"></i>
+               </div>
+            </div>
+
+            <!-- Contenedor para el mensaje de error -->
+            <div id="error-message" class="error-message"></div>
+
+         </div>
+
+         <button type="submit" class="r-button">Iniciar sesión</button>
+
+      </form>
+   </div>
+
+   <script src="../js/main.js"></script>
+   <script>
+      // Mostrar el mensaje de error si existe en la URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const errorMessage = urlParams.get('error');
+      if (errorMessage) {
+         document.getElementById('error-message').innerText = decodeURIComponent(errorMessage);
+
+         // Limpiar el parámetro de error de la URL
+         window.history.replaceState(null, null, window.location.pathname);
+      }
+   </script>
+</body>
+
+</html>

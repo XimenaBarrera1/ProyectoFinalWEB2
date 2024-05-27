@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Bienvenido al Escenario</h1>
+    <div id="contexto-detalle"></div>
+
+    <script>
+        // Obtener el ID del escenario de la URL
+        const params = new URLSearchParams(window.location.search);
+        const escenarioId = params.get('escenario_id');
+
+        // URL de tu API
+        const apiUrl = `http://localhost/Proyecto/php/get_niveles.php?escenario_id=${escenarioId}`;
+
+        // Función para cargar el contexto del escenario
+        function cargarContexto() {
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => mostrarContexto(data))
+                .catch(error => console.error('Error en la solicitud:', error.message));
+        }
+
+        // Función para mostrar el contexto del escenario
+        function mostrarContexto(contextos) {
+            const container = document.getElementById('contexto-detalle');
+            container.innerHTML = `
+                <form id="formulario-examen" method="POST" action="verificar_respuesta.php">
+                    ${contextos.map(contexto => `
+                        <div class="contexto">
+                            <p>${contexto.descripcion}</p>
+                            <div class="preguntas">
+                                ${contexto.preguntas.map(pregunta => `
+                                    <div class="pregunta">
+                                        <h4>${pregunta.pregunta}</h4>
+                                        ${pregunta.respuestas.map((respuesta, index) => `
+                                            <div>
+                                                <input type="radio" id="respuesta-${pregunta.id}-${index}" name="pregunta-${pregunta.id}" value="${respuesta.id}">
+                                                <label for="respuesta-${pregunta.id}-${index}">${respuesta.descripcion_respuesta}</label>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `).join('')}
+                    <div class="submit">
+                        <input type="submit" id="enviar" value="Enviar"/>
+                    </div>
+                </form>
+            `;
+        }
+
+        // Llamar a la función para cargar el contexto cuando la página se cargue
+        window.onload = cargarContexto;
+    </script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Documento</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <img src="img/logo.png" alt="Logo" class="logo">
+           
+            <nav>
+                <a href="html/login.html" >Inicia sesion</a>
+                <a href="html/registro.html">Registrate</a>
+            </nav>
+        </div>
+    </header>
+
+    <section id="presentacion">
+        <h1>Bienvenido</h1>
+    </section>
+
+    <section id="contenido">
+        <div class="container2">
+            <div class="img-container">
+                <img src="../img/partep.png" alt="" width="600px" style="margin-top: 40px;">
+            </div>
+            <div class="texto" style="margin-left: 200px;">
+                <h2>Conocenos!</h2>
+                <p>Nuestra plataforma web busca fortalecer el pensamiento computacional a traves
+                    de juegos sencillos y preguntas interactivas. Ofrecemos una variedad de desafios
+                    ludicos que introducen conceptos basicos de logica y algoritmos, ayudando a los
+                    usuarios a desarrollar habilidades esenciales para resolver problemas de manera
+                    creativa y eficiente.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="nuestros-juegos">
+        <div class="container">
+            <h2>Nuestros juegos</h2>
+            <div class="juegos">
+                <div class="juego1">
+                    <h3>Juego 1</h3>
+                    
+                    <button onclick="redirectToJuego('../ProyectoFinal/html/juego1/juego1.html')">Vamos!</button>
+                </div>
+                <div class="juego1">
+                    <h3>Juego 2</h3>
+                    <button onclick="redirectToJuego('../ProyectoFinal/phpj2/niveles.php')">Vamos!</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <script src="../Proyecto/js/juego1.js"></script>
+    <script src="../Proyecto/js/juego2.js"></script>
+    <script src="../Proyecto/js/main.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const isLoggedInCookie = document.cookie.split('; ').find(row => row.startsWith('isLoggedIn'));
+            const isLoggedIn = isLoggedInCookie ? isLoggedInCookie.split('=')[1] : null;
+            if (isLoggedIn === 'true') {
+                document.getElementById('login-link').style.display = 'none';
+                document.getElementById('register-link').style.display = 'none';
+                document.getElementById('logout-link').style.display = 'block';
+            }
+
+            document.getElementById('logout-link').addEventListener('click', () => {
+                document.cookie = 'isLoggedIn=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+                location.reload();
+            });
+        });
+    </script>
+    <footer>
+        <div class="container">
+            <p>&copy; Pensamiento Computacional</p>
+        </div>
+    </footer>
+</body>
+</html>
+
+
+
